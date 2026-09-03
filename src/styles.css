@@ -5,10 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Recon848 Insights — Tactical chrome command console design system.
- *
- * Dark-first command-center aesthetic. Colors in oklch. The site is dark
- * by default; :root carries the tactical dark register and .dark mirrors it.
+ * Recon848 Insights — Light tactical console design system.
+ * Bright paper surfaces, graphite ink type, deep signal-green accent.
  */
 
 @theme inline {
@@ -41,11 +39,12 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Tactical palette tokens */
-  --color-ink: var(--ink);
+  /* Tactical light palette tokens */
+  --color-paper: var(--paper);
   --color-panel: var(--panel);
   --color-panel2: var(--panel2);
-  --color-chrome: var(--chrome);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
 
   /* Fonts */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -56,55 +55,32 @@
 :root {
   --radius: 0.625rem;
 
-  /* Tactical dark register */
-  --ink: oklch(0.16 0.004 250);
-  --panel: oklch(0.19 0.006 250);
-  --panel2: oklch(0.23 0.008 250);
-  --accent: oklch(0.81 0.16 152);
-  --chrome: oklch(0.86 0.006 240);
+  /* Light tactical register */
+  --paper: oklch(0.985 0.002 250);
+  --panel: oklch(1 0 0);
+  --panel2: oklch(0.955 0.004 250);
+  --ink: oklch(0.24 0.008 255);
+  --accent: oklch(0.52 0.13 155);
+  --line: oklch(0.24 0.008 255 / 12%);
 
   /* Semantic mapping */
-  --background: var(--ink);
-  --foreground: var(--chrome);
+  --background: var(--paper);
+  --foreground: var(--ink);
   --card: var(--panel);
-  --card-foreground: var(--chrome);
+  --card-foreground: var(--ink);
   --popover: var(--panel);
-  --popover-foreground: var(--chrome);
-  --primary: var(--accent);
-  --primary-foreground: var(--ink);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: oklch(0.99 0 0);
   --secondary: var(--panel2);
-  --secondary-foreground: var(--chrome);
-  --muted: var(--panel2);
-  --muted-foreground: oklch(0.66 0.008 250);
-  --accent-foreground: var(--chrome);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.48 0.008 255);
+  --muted-foreground: oklch(0.48 0.008 255);
+  --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: var(--accent);
-}
-
-.dark {
-  --ink: oklch(0.16 0.004 250);
-  --panel: oklch(0.19 0.006 250);
-  --panel2: oklch(0.23 0.008 250);
-  --accent: oklch(0.81 0.16 152);
-  --chrome: oklch(0.86 0.006 240);
-  --background: var(--ink);
-  --foreground: var(--chrome);
-  --card: var(--panel);
-  --card-foreground: var(--chrome);
-  --popover: var(--panel);
-  --popover-foreground: var(--chrome);
-  --primary: var(--accent);
-  --primary-foreground: var(--ink);
-  --secondary: var(--panel2);
-  --secondary-foreground: var(--chrome);
-  --muted: var(--panel2);
-  --muted-foreground: oklch(0.66 0.008 250);
-  --accent-foreground: var(--chrome);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border: var(--line);
+  --input: var(--line);
   --ring: var(--accent);
 }
 
@@ -124,32 +100,22 @@
   }
 }
 
-/*
- * Tactical surface treatments — chrome text/fill, scanline, reveal.
- * Kept here so components stay token-driven.
- */
 @layer components {
-  .chrome-text {
+  .steel-text {
     background: linear-gradient(
       180deg,
-      oklch(0.96 0.004 240) 0%,
-      oklch(0.72 0.006 250) 42%,
-      oklch(0.5 0.008 255) 56%,
-      oklch(0.83 0.006 245) 100%
+      oklch(0.42 0.01 255) 0%,
+      oklch(0.24 0.008 255) 45%,
+      oklch(0.34 0.01 255) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .chrome-fill {
-    background: linear-gradient(
-      180deg,
-      oklch(0.9 0.005 240) 0%,
-      oklch(0.66 0.007 250) 48%,
-      oklch(0.48 0.008 255) 52%,
-      oklch(0.8 0.006 245) 100%
-    );
+  .ink-fill {
+    background: var(--ink);
+    color: oklch(0.99 0 0);
   }
 
   .scanline {
@@ -159,7 +125,7 @@
     height: 1px;
     top: 0;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    box-shadow: 0 0 14px 1px oklch(0.81 0.16 152 / 40%);
+    opacity: 0.55;
     animation: scan 7s linear infinite;
   }
 
@@ -169,10 +135,10 @@
       opacity: 0;
     }
     10% {
-      opacity: 0.7;
+      opacity: 0.5;
     }
     90% {
-      opacity: 0.7;
+      opacity: 0.5;
     }
     100% {
       top: 102%;
