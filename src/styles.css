@@ -101,7 +101,7 @@
   --secondary: var(--panel2);
   --secondary-foreground: var(--chrome);
   --muted: var(--panel2);
-  --muted-foreground: oklch(0.55 0.008 250);
+  --muted-foreground: oklch(0.66 0.008 250);
   --accent-foreground: var(--chrome);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
